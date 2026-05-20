@@ -1,7 +1,12 @@
 pipeline {
     agent any
 
+    environment {
+        PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:${env.PATH}"
+    }
+
     stages {
+
         stage('Build') {
             steps {
                 sh 'npm install'
@@ -49,6 +54,16 @@ pipeline {
             steps {
                 echo 'Monitoring available at /health and /metrics endpoints'
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline executed successfully'
+        }
+
+        failure {
+            echo 'Pipeline failed'
         }
     }
 }
