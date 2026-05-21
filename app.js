@@ -1,18 +1,17 @@
 const express = require("express");
+const path = require("path");
 const client = require("prom-client");
 
 const app = express();
+
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
 client.collectDefaultMetrics();
 
 let tasks = [
   { id: 1, title: "Complete Jenkins pipeline", completed: false }
 ];
-
-app.get("/", (req, res) => {
-  res.send("Student Task Manager API is running");
-});
 
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "UP", service: "student-task-manager" });
