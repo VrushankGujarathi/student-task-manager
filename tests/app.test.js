@@ -3,11 +3,11 @@ const app = require("../app");
 
 describe("Student Task Manager API", () => {
 
-  test("GET / should return API message", async () => {
+  test("GET / should return frontend page", async () => {
     const response = await request(app).get("/");
 
     expect(response.statusCode).toBe(200);
-    expect(response.text).toBe("Student Task Manager API is running");
+    expect(response.text).toContain("Student Task Manager");
   });
 
   test("GET /health should return health status", async () => {
