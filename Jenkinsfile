@@ -39,7 +39,8 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'docker rm -f student-task-manager || true'
+                sh 'docker stop student-task-manager || true'
+                sh 'docker rm student-task-manager || true'
                 sh 'docker run -d --name student-task-manager -p 3001:3000 student-task-manager'
             }
         }
